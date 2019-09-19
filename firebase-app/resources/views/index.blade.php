@@ -26,13 +26,23 @@
                 };
             
                 $.post('/api/checkLogin', postObject, function (data, status) {
-                    console.log(data);
-                    console.log(status);
+                    if (status == 'success') {
+                        if (data != false) {
+                            alert('This detail is correct.');
+                            return;
+                        }
+                    }
+                    alert('Invalid username/password.');
                 });
             };
 
             function pushMessage() {
                 let message = $('#message').val();
+
+                if (message.length > 140) {
+                    alert('Error! The message is too long!');
+                    return;
+                }
 
                 let postObject = {
                     _token: csrfToken,
@@ -40,8 +50,11 @@
                 };
 
                 $.post('/api/pushMessage', postObject, function (data, status) {
-                    console.log(data);
-                    console.log(status);
+                    if (status == 'success') {
+                        alert('message sent');
+                        return;
+                    }
+                    alert('error sending message');
                 });
             }
         </script>
@@ -55,7 +68,7 @@
 
             <br /> <br />
 
-            <input class="form-control" id="message" type="text" />
+            <input class="form-control" id="message" type="text" max="140" />
             <button class="btn btn-primary" type="button" onclick="pushMessage()">Send Message</button>
 
         </div>
