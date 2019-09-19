@@ -8,6 +8,8 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\Database;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Exception\Auth\EmailExists as FirebaseEmailExists;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
 
 class FirebaseService
 {
@@ -41,6 +43,18 @@ class FirebaseService
             logger()->info('Error login to firebase: Tried to create an already existent user');
         } catch (Exception $e) {
             logger()->error('Error login to firebase: ' . $e->getMessage());
+        }
+        return false;
+    }
+
+    public function pushMessage($messageJson) {
+        try {
+            $database = $this->firebase->getDatabase();
+            $database->getReference('messages')
+            ->push($messageJson);
+        } catch (Exception $ex) {
+            // TODO: add better error handling here
+            dd($ex);
         }
         return false;
     }

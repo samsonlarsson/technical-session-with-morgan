@@ -14,4 +14,11 @@ class ApiController extends Controller
         $firebase = new FirebaseService();
         dd($firebase->verifyPassword($username, $password));
     }
+
+    public function sendMessage(Request $request) {
+        $message = $request->input('message'); // TODO: make this actually json
+
+        $firebase = new FirebaseService();
+        $firebase->pushMessage($message);
+    }
 }

@@ -29,15 +29,35 @@
                     console.log(data);
                     console.log(status);
                 });
+            };
+
+            function pushMessage() {
+                let message = $('#message').val();
+
+                let postObject = {
+                    _token: csrfToken,
+                    message: message
+                };
+
+                $.post('/api/pushMessage', postObject, function (data, status) {
+                    console.log(data);
+                    console.log(status);
+                });
             }
         </script>
     </head>
     <body>
         <div class="container">
-            <input id="username" type="text" />
-            <input id="password" type="password" />
+            <input class="form-control" id="username" type="text" />
+            <input class="form-control" id="password" type="password" />
 
-            <button type="button" onclick="checkLogin()">Login</button>
+            <button class="btn btn-primary" type="button" onclick="checkLogin()">Login</button>
+
+            <br /> <br />
+
+            <input class="form-control" id="message" type="text" />
+            <button class="btn btn-primary" type="button" onclick="pushMessage()">Send Message</button>
+
         </div>
     </body>
 </html>

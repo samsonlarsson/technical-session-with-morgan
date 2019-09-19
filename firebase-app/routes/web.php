@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::post('/api/checkLogin', 'ApiController@checkLogin');
+Route::post('/api/pushMessage', 'ApiController@sendMessage');
