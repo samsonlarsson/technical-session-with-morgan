@@ -1,6 +1,6 @@
 <?php
-
-namespace App\Services;
+// TODO: use as a service instead of class
+namespace App;
 
 use Exception;
 use Kreait\Firebase;
